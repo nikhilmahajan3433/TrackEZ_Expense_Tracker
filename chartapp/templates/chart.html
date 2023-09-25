@@ -1,0 +1,114 @@
+<style>
+    .row{
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    padding-left: 16%;
+    padding-right: 20%;
+    }
+    .chart{
+        width: 550px;
+        padding-right: 60px;
+    }
+    .chart1{
+      width: 380px;
+    }
+
+    .chart2{
+      position: sticky;
+      top: 60%;
+      width: 550px;
+      padding-left: 25%;
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+<div class="row">
+<div class="chart"><strong><h2><u>Last 5 income</u></h2></strong><canvas id="chart"></canvas></div>
+<div class="chart1"><strong><h2><u>Top 5 expenses</u></h2></strong><canvas id="chart1"></div>
+</canvas>
+</div>
+
+<div class="chart2"><strong><h2><u>Income by Day</u></h2></strong><canvas id="income_chart"></canvas></div>
+
+<script>
+ let ctx = document.getElementById("chart").getContext("2d");
+
+let chart = new Chart(ctx, {
+  type: "bar",
+  data: {
+   //   labels: ["2020/Q1", "2020/Q2", "2020/Q3", "2020/Q4"],
+     labels: [{% for label in inc5 %} '{{label.title}}',{% endfor %}],
+     datasets: [
+        {
+          label: "Total Expense",
+          backgroundColor: "#79AEC8",
+          borderColor: "#417690",
+         //  data: [269000, 287000, 253000, 292000]
+         data: [{% for label in inc5 %} '{{label.value}}',{% endfor %}]
+        }
+     ]
+  },
+  options: {
+     title: {
+        text: "Gross Volume in 2020",
+        display: true,
+        responsive : false,
+        
+     },
+   Plugin:[ChartDataLabels]
+  }
+});
+
+
+let ctx1 = document.getElementById("chart1").getContext("2d");
+let chart1 = new Chart(ctx1, {
+  type: "pie",
+  data: {
+     labels: [{% for label in exp5 %} '{{label.trans}}',{% endfor %}],
+     datasets: [
+        {
+          label: "Total Expense",
+          backgroundColor: ["#79AEC8","red","purple","yellow","orange"],
+          borderColor: "#417690",
+          data: [{% for dt in exp5 %} '{{dt.val}}', {% endfor %}]
+        }
+     ]
+  },
+  options: {
+     title: {
+        text: "Gross Volume in 2020",
+        display: true,
+        responsive : false,
+        
+     }
+  }
+});
+
+
+
+let ctx2 = document.getElementById("income_chart").getContext("2d");
+let income_chart = new Chart(ctx2, {
+  type: "line",
+  data: {
+     labels: [{% for i in inc %} '{{i.timestamp}}', {%endfor%}],
+     datasets: [
+        {
+          label: "Total Income",
+          backgroundColor: ["#79AEC8","red","orange","yellow",],
+          borderColor: "#417690",
+          data: [{% for i in inc %} '{{i.value}}', {%endfor%}]
+        }
+     ]
+  },
+  options: {
+     title: {
+        text: "Income by Day",
+        display: true,
+        responsive : false,
+        
+     }
+  }
+});
+</script>

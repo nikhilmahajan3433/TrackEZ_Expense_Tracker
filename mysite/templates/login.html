@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'st.css'%}">
+        <title>Page name</title>
+    </head>
+    <body>
+        <div class="title">
+        <p style="font-size: 500;font-weight: bold;font-family:Arial, Helvetica, sans-serif;text-align: center;">LogIN Page</p>
+        </div>
+        <form method="GET" action="login">
+        <div class="box">
+            <h2>LOGIN</h2>
+            <!-- <form method="get" action="login"> -->
+            <input type="text" name="uname" placeholder="Username">
+            <input type="password" name="pss" placeholder="Password">
+            <button type="submit">LOG IN </button>
+            </form>
+        </div>
+        </form>
+    </body>
+</html>

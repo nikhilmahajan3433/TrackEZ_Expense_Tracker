@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'st.css'%}">
+        <title>Page name</title>
+    </head>
+    <body>
+        <div class="title">
+        <p style="font-size: 500;font-weight: bold;font-family:Arial, Helvetica, sans-serif;text-align: center;">SignUp Page</p>
+        </div>
+        <form method="GET" action="upload">
+        <div class="box">
+            <h2>SIGNUP</h2>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="pass" placeholder="Password">
+            <input type="submit" name=Submit id="btn">
+        </div>
+        </form>
+    </body>
+</html>
